@@ -5,7 +5,7 @@
 			<th>Pemesan</th>
 			<!-- <th>Alamat</th>
 			<th>Email</th>-->
-			<th>Telp.</th> 
+			<th>Telp.</th>
 			<th>CheckIn</th>
 			<th>CheckOut</th>
 			<th>Opsi</th>
@@ -30,3 +30,8 @@
 		?>
 	</tbody>
 </table>
+<script>
+	$(document).ready(function(){
+		$('#grid').DataTable();
+	});
+</script>

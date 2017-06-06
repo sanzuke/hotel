@@ -10,21 +10,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <title>Modern an Admin Panel Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
  <!-- Bootstrap Core CSS -->
 <link href="<?php echo base_url(); ?>assets/admin/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
 <link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="<?php echo base_url(); ?>assets/admin/css/jquery.dataTables.min.css" rel='stylesheet' type='text/css' />
 <!-- Graph CSS -->
 <link href="<?php echo base_url(); ?>assets/admin/css/lines.css" rel='stylesheet' type='text/css' />
-<link href="<?php echo base_url(); ?>assets/admin/css/font-awesome.css" rel="stylesheet"> 
+<link href="<?php echo base_url(); ?>assets/admin/css/font-awesome.css" rel="stylesheet">
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/admin/js/jquery.min.js"></script>
-<!----webfonts--->
+<!-- webfonts--->
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-<!---//webfonts--->  
+<!---//webfonts--->
 <!-- Nav CSS -->
 <link href="<?php echo base_url(); ?>assets/admin/css/custom.css" rel="stylesheet">
 <!-- Metis Menu Plugin JavaScript -->
@@ -34,6 +36,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="<?php echo base_url(); ?>assets/admin/js/d3.v3.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/js/rickshaw.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/tinymce/tinymce.min.js"></script>
+<!-- DataTable -->
+<script src="<?php echo base_url(); ?>assets/admin/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -107,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 						<li class="dropdown-menu-footer text-center">
 							<a href="#">View all messages</a>
-						</li>	
+						</li>
 	        		</ul>
 	      		</li>
 			    <li class="dropdown">
@@ -129,7 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
 						<li class="divider"></li> -->
 						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>	
+						<li class="m_2"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
 	        		</ul>
 	      		</li>
 			</ul>
@@ -225,6 +229,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    </div>
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo base_url() ?>assets/admin/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/admin/js/bootstrap.min.js"></script>
 </body>
 </html>
