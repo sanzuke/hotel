@@ -24,7 +24,7 @@ class Admin_model extends CI_Model {
         default :
           $hasil = date("d-m-Y",strtotime($d));
   		}
-  		
+
   		return $hasil;
   	}
 
@@ -56,6 +56,11 @@ class Admin_model extends CI_Model {
 
     	return $query;
     }
+
+		public function parentlistpage(){
+			$query = $this->db->get_where("cm_post", array("post_type"=> "page"));
+      return $query;
+		}
 
     public function loadListCategory(){
       $query = $this->db->get_where("ss_category", array("category_parent"=> "0"));

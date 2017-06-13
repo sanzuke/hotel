@@ -1,12 +1,13 @@
 <h3>Tambah Halaman</h3>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="<?php echo base_url() ?>admin/savepage" enctype="multipart/form-data">
 	<div class="col-md-8">
 		<div class="form-group">
 	     	<label class="control-label" for="inputSuccess1"></label>
-	        <input type="text" class="form-control1" id="judul" placeholder="Masukan Judul Disini">
+				<input type="text" class="form-control1" name="judul" id="judul" placeholder="Masukan Judul Disini">
+	      <input type="hidden" id="id">
 	    </div>
 		<div class="form-group">
-			<textarea class="form-control1" id="editor"></textarea>
+			<textarea class="form-control1" name="konten" id="editor"></textarea>
 		</div>
 	</div>
 	<div class="col-md-4"><br>
@@ -16,19 +17,24 @@
 				<div class="form-group">
 					<label for="selector1" class="col-sm-3 control-label">Parent</label>
 					<div class="col-sm-9">
-						<select name="selector1" id="selector1" class="form-control1">
+						<select name="parent" id="selector1" class="form-control1">
 							<option value="0">(no parent)</option>
-							<option>Lorem ipsum dolor sit amet.</option>
+							<?php
+							foreach ($parentlist->result() as $value) {
+								echo '<option value="'.$value->id.'">'.$value->post_title.'</option>';
+							}
+							?>
+							<!-- <option>Lorem ipsum dolor sit amet.</option>
 							<option>Dolore, ab unde modi est!</option>
 							<option>Illum, fuga minus sit eaque.</option>
-							<option>Consequatur ducimus maiores voluptatum minima.</option>
+							<option>Consequatur ducimus maiores voluptatum minima.</option> -->
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="checkbox" class="col-sm-3 control-label">Publikasi</label>
 					<div class="col-sm-9">
-						<div class="checkbox-inline"><label><input type="checkbox" checked=""></label></div>
+						<div class="checkbox-inline"><label><input type="checkbox" name="publish" checked=""></label></div>
 					</div>
 				</div>
 			</div>
@@ -44,7 +50,7 @@
 			<div class="panel-body">
 				<div class="form-group">
 			        <label for="exampleInputFile" class="col-md-12">Upload Gambar</label>
-			        <input type="file" id="exampleInputFile" class="col-md-12">
+			        <input type="file" name="userfile" id="exampleInputFile" class="col-md-12">
 			    </div>
 			</div>
 		</div>

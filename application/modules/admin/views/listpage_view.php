@@ -1,4 +1,5 @@
 <h3>Daftar Halaman</h3>
+<?php echo $this->Admin_model->showMessage(); ?>
 <table class="table table-striped" id="grid">
 	<thead>
 		<tr>

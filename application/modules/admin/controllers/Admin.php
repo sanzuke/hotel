@@ -11,7 +11,7 @@ class Admin extends MX_Controller {
 	public function auth(){
 		$user = $this->input->post("username", true);
 		$pass = $this->input->post("password", true);
-	
+
 		$query = $this->db->query("SELECT * FROM users WHERE user_login = '{$user}' AND password = PASSWORD('{$pass}')");
 		if($query->num_rows() > 0){
 			// redirect("admin/dashboard");
@@ -20,7 +20,7 @@ class Admin extends MX_Controller {
 			// redirect("admin");
 		}
 	}
-	
+
 	// =========================================== //
 	// 					Dashboard
 	// =========================================== //
@@ -45,8 +45,11 @@ class Admin extends MX_Controller {
 	}
 
 	public function addpage(){
+		$this->load->model("Admin_model");
 		$data['konten_view'] 	= "addpage_view";
 		$data['judul_halaman']	= "Tambah Halaman";
+
+		$data['parentlist'] = $this->Admin_model->parentlistpage();
 
 		$this->load->view("index", $data);
 	}
@@ -56,7 +59,61 @@ class Admin extends MX_Controller {
 	}
 
 	public function savepage(){
+		$id 			= $this->input->post("id", true);
+		$judul 		= $this->input->post("judul", true);
+		$konten 	= $this->input->post("konten", true);
+		$parent 	= $this->input->post("parent", true);
+		$publish 	= $this->input->post("publish", true)  == "on" ? 1 : 0;
+		// $userfile = $this->input->post("userfile", true);
 
+		if($id == ""){ // jika field id kosong (Insert)
+
+			// if( $userfile != "" ){ // jika upload file ada
+				$config['upload_path']          = './uploads/';
+		    $config['allowed_types']        = 'gif|jpg|png';
+		    $config['max_size']             = 100;
+		    $config['max_width']            = 1024;
+		    $config['max_height']           = 768;
+
+		    $this->load->library('upload', $config);
+
+		    if ( ! $this->upload->do_upload('userfile'))
+		    {
+		            $error = array('error' => $this->upload->display_errors());
+								$this->session->set_flashdata("message", "false:Data gagal disimpan <br>".$this->upload->display_errors() );
+
+		            // $this->load->view('upload_form', $error);
+		    } else {
+		            $data = array('upload_data' => $this->upload->data());
+								$this->session->set_flashdata("message", "true:Data berhasil disimpan" );
+
+								// $upload = $this->db->query("INSERT INTO");
+
+		            // $this->load->view('upload_success', $data);
+								$result = $this->db->query("INSERT INTO cm_post (id, post_title, post_date, post_content, post_type, 	post_status, post_author, image )
+								VALUES(NULL, '".$judul."','".date("Y-m-d H:i")."','".$konten."','page','".$publish."','1', '".$this->upload->data('file_name')."')");
+
+								if($result){
+									$this->session->set_flashdata("message", "true:Data berhasil disimpan<br> asup file na" );
+								} else {
+									$this->session->set_flashdata("message", "false:Data gagal disimpan<br> wqwdasd " .$this->db->_error_message());
+								}
+		    }
+				redirect("admin/listPage");
+			// } else { // jika upload file tidak ada
+			// 	$result = $this->db->query("INSERT INTO cm_post (id, post_title, post_date, post_content, post_type, 	post_status, post_author )
+			// 	VALUES(NULL, '".$judul."','".date("Y-m-d H:i")."','".$konten."','page','".$publish."','1')");
+			//
+			// 	if($result){
+			// 		$this->session->set_flashdata("message", "true:Data berhasil disimpan ". $userfile );
+			// 	} else {
+			// 		$this->session->set_flashdata("message", "false:Data gagal disimpan<br> wqwdasd " .$this->db->_error_message());
+			// 	}
+			// 	redirect("admin/listPage");
+			// }
+		} else { // jika field id tidak kosong (Update)
+
+		}
 	}
 
 
