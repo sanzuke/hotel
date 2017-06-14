@@ -54,17 +54,17 @@ class Core_model extends CI_Model {
   	}
 
   	function loadPost($idPost){
-  		$qr=$this->db->query("select * from post where id='$idPost'");
+  		$qr=$this->db->query("select * from cm_post where id='$idPost'");
   		$view=$qr->row();
   		return $view;
   	}
-  	
+
   	function getViewerPost($id){
   		$q = $this->db->query("SELECT viewer FROM post WHERE id = '{$id}'");
   		$row = $q->row();
   		return $row->viewer;
   	}
-  	
+
   	function getImgPost($id){
   		$q = $this->db->query("SELECT photo FROM post WHERE id = '{$id}'");
   		$row = $q->row();

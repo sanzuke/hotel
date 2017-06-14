@@ -84,4 +84,9 @@ class Admin_model extends CI_Model {
       return $query;
     }
 
+		public function loadPageEdit($id)
+		{
+			$query = $this->db->get_where("cm_post", array("id" => $id));
+			return $query;
+		}
 }

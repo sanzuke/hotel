@@ -50,12 +50,48 @@ class Admin extends MX_Controller {
 		$data['judul_halaman']	= "Tambah Halaman";
 
 		$data['parentlist'] = $this->Admin_model->parentlistpage();
+		$data['id'] = "";
+		$data['judul'] = "";
+		$data['konten'] = "";
+		$data['pub'] = "";
+		$data['img'] = "";
 
 		$this->load->view("index", $data);
 	}
 
 	public function editpage(){
+		$this->load->model("Admin_model");
+		$data['konten_view'] 	= "addpage_view";
+		$data['judul_halaman']	= "Tambah Halaman";
 
+		$data['parentlist'] = $this->Admin_model->parentlistpage();
+		$data['id'] = $this->uri->segment(3);
+		$dataPage = $this->Admin_model->loadPageEdit($data['id']);
+		foreach ($dataPage->result() as $key) {
+			$judul = $key->post_title;
+			$konten= $key->post_content;
+			$pub = $key->post_status;
+			$img = $key->image;
+		}
+		$data['judul'] = $judul;
+		$data['konten'] = $konten;
+		$data['pub'] = $pub;
+		$data['img'] = $img;
+
+		$this->load->view("index", $data);
+	}
+
+	public function delpage(){
+		$id = $this->uri->segment(3);
+		if($id != ""){
+			$hasil = $this->db->query("DELETE FROM cm_post WHERE id = '{$id}'");
+			if($hasil){
+				$this->session->set_flashdata("message", "true:Data telah dihapus");
+			} else {
+				$this->session->set_flashdata("message", "false:Data gagal dihapus");
+			}
+		}
+		redirect("admin/listpage");
 	}
 
 	public function savepage(){
@@ -64,19 +100,19 @@ class Admin extends MX_Controller {
 		$konten 	= $this->input->post("konten", true);
 		$parent 	= $this->input->post("parent", true);
 		$publish 	= $this->input->post("publish", true)  == "on" ? 1 : 0;
-		// $userfile = $this->input->post("userfile", true);
+		$file = $this->input->post("userfile", true);
+
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
 
 		if($id == ""){ // jika field id kosong (Insert)
 
-			// if( $userfile != "" ){ // jika upload file ada
-				$config['upload_path']          = './uploads/';
-		    $config['allowed_types']        = 'gif|jpg|png';
-		    $config['max_size']             = 100;
-		    $config['max_width']            = 1024;
-		    $config['max_height']           = 768;
-
-		    $this->load->library('upload', $config);
-
+			if( $_FILES['userfile']['size'] != 0 ){ // jika upload file ada
 		    if ( ! $this->upload->do_upload('userfile'))
 		    {
 		            $error = array('error' => $this->upload->display_errors());
@@ -94,25 +130,64 @@ class Admin extends MX_Controller {
 								VALUES(NULL, '".$judul."','".date("Y-m-d H:i")."','".$konten."','page','".$publish."','1', '".$this->upload->data('file_name')."')");
 
 								if($result){
-									$this->session->set_flashdata("message", "true:Data berhasil disimpan<br> asup file na" );
+									$this->session->set_flashdata("message", "true:Data berhasil disimpan" );
 								} else {
-									$this->session->set_flashdata("message", "false:Data gagal disimpan<br> wqwdasd " .$this->db->_error_message());
+									$this->session->set_flashdata("message", "false:Data gagal disimpan<br> " .$this->db->_error_message());
 								}
 		    }
 				redirect("admin/listPage");
-			// } else { // jika upload file tidak ada
-			// 	$result = $this->db->query("INSERT INTO cm_post (id, post_title, post_date, post_content, post_type, 	post_status, post_author )
-			// 	VALUES(NULL, '".$judul."','".date("Y-m-d H:i")."','".$konten."','page','".$publish."','1')");
-			//
-			// 	if($result){
-			// 		$this->session->set_flashdata("message", "true:Data berhasil disimpan ". $userfile );
-			// 	} else {
-			// 		$this->session->set_flashdata("message", "false:Data gagal disimpan<br> wqwdasd " .$this->db->_error_message());
-			// 	}
-			// 	redirect("admin/listPage");
-			// }
-		} else { // jika field id tidak kosong (Update)
+			} else { // jika upload file tidak ada
+				$result = $this->db->query("INSERT INTO cm_post (id, post_title, post_date, post_content, post_type, 	post_status, post_author )
+				VALUES(NULL, '".$judul."','".date("Y-m-d H:i")."','".$konten."','page','".$publish."','1')");
 
+				if($result){
+					$this->session->set_flashdata("message", "true:Data berhasil disimpan ". $userfile );
+				} else {
+					$this->session->set_flashdata("message", "false:Data gagal disimpan<br> wqwdasd " .$this->db->_error_message());
+				}
+				redirect("admin/listPage");
+			}
+		} else { // jika field id tidak kosong (Update)
+			if( $_FILES['userfile']['size'] != 0 ){
+
+				if ( ! $this->upload->do_upload('userfile'))
+				{
+								$error = array('error' => $this->upload->display_errors());
+								$this->session->set_flashdata("message", "false:Data gagal disimpan <br>".$this->upload->display_errors() );
+
+								// $this->load->view('upload_form', $error);
+				} else {
+								$data = array('upload_data' => $this->upload->data());
+								$this->session->set_flashdata("message", "true:Data berhasil disimpan" );
+
+								// $upload = $this->db->query("INSERT INTO");
+
+								// $this->load->view('upload_success', $data);
+								$result = $this->db->query("UPDATE cm_post SET post_title = '".$judul."',
+								post_content = '".$konten."',
+								post_status = '".$publish."',
+								image ='".$this->upload->data('file_name')."'
+								WHERE id = '".$id."' ");
+
+								if($result){
+									$this->session->set_flashdata("message", "true:Data berhasil diubah !!!" );
+								} else {
+									$this->session->set_flashdata("message", "false:Data gagal diubah<br> " .$this->db->_error_message());
+								}
+				}
+			} else {
+				$result = $this->db->query("UPDATE cm_post SET post_title = '".$judul."',
+				post_content = '".$konten."',
+				post_status = '".$publish."'
+				WHERE id = '".$id."'  ");
+
+				if($result){
+					$this->session->set_flashdata("message", "true:Data berhasil diubah" );
+				} else {
+					$this->session->set_flashdata("message", "false:Data gagal diubah<br> " .$this->db->_error_message());
+				}
+			}
+			redirect("admin/listPage");
 		}
 	}
 

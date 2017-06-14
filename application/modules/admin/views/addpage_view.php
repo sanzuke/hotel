@@ -3,18 +3,18 @@
 	<div class="col-md-8">
 		<div class="form-group">
 	     	<label class="control-label" for="inputSuccess1"></label>
-				<input type="text" class="form-control1" name="judul" id="judul" placeholder="Masukan Judul Disini">
-	      <input type="hidden" id="id">
+				<input type="text" class="form-control1" name="judul" id="judul" placeholder="Masukan Judul Disini" value="<?php echo $judul ?>">
+	      <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
 	    </div>
 		<div class="form-group">
-			<textarea class="form-control1" name="konten" id="editor"></textarea>
+			<textarea class="form-control1" name="konten" id="editor"><?php echo $konten ?></textarea>
 		</div>
 	</div>
 	<div class="col-md-4"><br>
 		<div class="panel panel-default">
 			<div class="panel-heading">Opsi</div>
 			<div class="panel-body">
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="selector1" class="col-sm-3 control-label">Parent</label>
 					<div class="col-sm-9">
 						<select name="parent" id="selector1" class="form-control1">
@@ -24,13 +24,9 @@
 								echo '<option value="'.$value->id.'">'.$value->post_title.'</option>';
 							}
 							?>
-							<!-- <option>Lorem ipsum dolor sit amet.</option>
-							<option>Dolore, ab unde modi est!</option>
-							<option>Illum, fuga minus sit eaque.</option>
-							<option>Consequatur ducimus maiores voluptatum minima.</option> -->
 						</select>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label for="checkbox" class="col-sm-3 control-label">Publikasi</label>
 					<div class="col-sm-9">
@@ -49,9 +45,14 @@
 			<div class="panel-heading">Gambar</div>
 			<div class="panel-body">
 				<div class="form-group">
-			        <label for="exampleInputFile" class="col-md-12">Upload Gambar</label>
-			        <input type="file" name="userfile" id="exampleInputFile" class="col-md-12">
-			    </div>
+		        <label for="exampleInputFile" class="col-md-12">Upload Gambar</label>
+		        <input type="file" name="userfile" id="exampleInputFile" class="col-md-12">
+		    </div>
+				<?php if($img){ ?>
+				<div class="form-group col-md-12">
+					<img src="<?php echo base_url(). 'uploads/'.$img ?>" class="thumbnail img-responsive">
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

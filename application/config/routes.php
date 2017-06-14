@@ -53,3 +53,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['page'] = 'Welcome/page';
+$route['profil'] = 'Welcome/page/2';
+$route['layanan'] = 'Welcome/page/3';
+$route['kamar'] = 'Welcome/page/4';
+$route['galeri'] = 'Welcome/page/5';
+$route['kontak'] = 'Welcome/page/6';

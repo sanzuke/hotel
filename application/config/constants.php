@@ -89,5 +89,5 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 $server_path = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 define('TEMPLATE_URL',$server_path.'content/theme/');
-define('TEMPLATE_PATH','../../content/theme/');
+define('TEMPLATE_PATH','content/theme/');
 define('PLUGIN_PATH','../../content/plugin/');
