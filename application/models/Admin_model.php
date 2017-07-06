@@ -89,4 +89,9 @@ class Admin_model extends CI_Model {
 			$query = $this->db->get_where("cm_post", array("id" => $id));
 			return $query;
 		}
+
+		public function loadListGallery(){
+      $query = $this->db->get_where("cm_gallery");
+      return $query;
+    }
 }

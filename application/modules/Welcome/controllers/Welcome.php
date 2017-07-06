@@ -20,18 +20,23 @@ class Welcome extends MX_Controller {
 		switch ($uri) {
 			case 'profil':
 				$id = '2';
+				$data['kontak'] = '';
 				break;
 			case 'layanan':
 				$id = '3';
+				$data['kontak'] = '';
 				break;
 			case 'kamar':
 				$id = '4';
+				$data['kontak'] = '';
 				break;
 			case 'galeri':
 				$id = '5';
+				$data['kontak'] = '';
 				break;
 			case 'kontak':
 				$id = '6';
+				$data['kontak'] = $this->Core_model->loadOption('bucontact');
 				break;
 			default:
 				# code...
@@ -41,7 +46,20 @@ class Welcome extends MX_Controller {
 		$data['page_content'] = $this->Core_model->loadPost($id);
 		$data['page_title'] = ucwords(strtolower($uri));
 		// $this->load->view('../../content/theme/default/index');
-		$data['page_view'] = "page";
+		if($id == '5'){
+			$data['galleryList'] = $this->Core_model->loadGallery();
+			$data['page_view'] = "gallery";
+		} else {
+			$data['page_view'] = "page";
+		}
+
+		$data['fb'] = $this->Core_model->loadOption('FBLink');
+		$data['tw'] = $this->Core_model->loadOption('TWLink');
+		$data['ig'] = $this->Core_model->loadOption('IGLink');
+		$data['ph'] = $this->Core_model->loadOption('PH');
+		$data['em'] = $this->Core_model->loadOption('email');
+		$data['logo'] = $this->Core_model->loadOption('logo');
+		$data['sitename'] = $this->Core_model->loadOption('buname');
 
 		$this->load->view('../../content/theme/mr_hotel/index', $data);
 	}

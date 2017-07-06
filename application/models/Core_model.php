@@ -56,7 +56,7 @@ class Core_model extends CI_Model {
   	function loadPost($idPost){
   		$qr=$this->db->query("select * from cm_post where id='$idPost'");
   		$view=$qr->row();
-  		return $view;
+  		return $qr;
   	}
 
   	function getViewerPost($id){
@@ -131,4 +131,23 @@ class Core_model extends CI_Model {
       }
 
     }
+
+		function loadGallery(){
+			$query = $this->db->query("SELECT * FROM cm_gallery ORDER BY id DESC");
+			return $query;
+		}
+
+		function loadOption($value='')
+		{
+			$result ='';
+			if($value != ''){
+				$query = $this->db->query("SELECT * FROM ss_options WHERE codename ='{$value}'");
+				foreach ($query->result() as $row)
+				{
+	        $result = $row->value;
+				}
+			}
+
+			return $result;
+		}
 }

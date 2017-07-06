@@ -417,7 +417,7 @@ class Admin extends MX_Controller {
 
 		$data['konten_view'] 	= "listgallery_view";
 		$data['judul_halaman']	= "Daftar Galeri";
-		$data['listPage']		= $this->Admin_model->loadListPage('post');
+		$data['listPage']		= $this->Admin_model->loadListGallery();
 
 		$this->load->view("index", $data);
 	}
