@@ -60,3 +60,4 @@ $route['layanan'] = 'Welcome/page/3';
 $route['kamar'] = 'Welcome/page/4';
 $route['galeri'] = 'Welcome/page/5';
 $route['kontak'] = 'Welcome/page/6';
+$route['saveref'] = 'Welcome/saveref';

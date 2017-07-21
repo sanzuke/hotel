@@ -150,4 +150,10 @@ class Core_model extends CI_Model {
 
 			return $result;
 		}
+
+		function loadKamar()
+		{
+			$query = $this->db->query("SELECT * FROM `ss_jenis_kamar`");
+			return $query;
+		}
 }

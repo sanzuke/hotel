@@ -50,96 +50,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Modern</a>
+                <a class="navbar-brand" href="<?php echo base_url() ?>admin/dashboard">Admin Panel</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-comments-o"></i><span class="badge">4</span></a>
-	        		<ul class="dropdown-menu">
-						<li class="dropdown-menu-header">
-							<strong>Messages</strong>
-							<div class="progress thin">
-							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-							    <span class="sr-only">40% Complete (success)</span>
-							  </div>
-							</div>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/1.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-								<span class="label label-info">NEW</span>
-							</a>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/2.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-								<span class="label label-info">NEW</span>
-							</a>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/3.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-							</a>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/4.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-							</a>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/5.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-							</a>
-						</li>
-						<li class="avatar">
-							<a href="#">
-								<img src="<?php echo base_url() ?>assets/admin/images/pic1.png" alt=""/>
-								<div>New message</div>
-								<small>1 minute ago</small>
-							</a>
-						</li>
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-comments-o"></i><span class="badge"><?php echo $reserfasiAllBaru ?></span></a>
+	        <ul class="dropdown-menu">
+            <?php foreach ($reserfasi5Baru->result() as $key) { ?>
+              <li class="avatar">
+  							<a href="javascript:;" onclick="showNotif('<?php echo $key->KodeR; ?>', null)">
+  								<img src="<?php echo base_url() ?>assets/admin/images/1.png" alt=""/>
+  								<div><?php echo $key->Nama ?></div>
+  								<small><?php echo $this->Admin_model->time_elapsed_string($key->createddate, false) ?></small>
+  								<span class="label label-info"><?php echo $key->isread = 0 ? '' : 'BARU' ?></span>
+  							</a>
+  						</li>
+            <?php } ?>
 						<li class="dropdown-menu-footer text-center">
 							<a href="#">View all messages</a>
 						</li>
 	        		</ul>
 	      		</li>
 			    <li class="dropdown">
-	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="<?php echo base_url() ?>assets/admin/images/1.png"><!-- <span class="badge">9</span> --></a>
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-user fa-lg"></i><!-- <span class="badge">9</span> --></a>
 	        		<ul class="dropdown-menu">
-						<!-- <li class="dropdown-menu-header text-center">
-							<strong>Account</strong>
-						</li>
-						<li class="m_2"><a href="#"><i class="fa fa-bell-o"></i> Updates <span class="label label-info">42</span></a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-envelope-o"></i> Messages <span class="label label-success">42</span></a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-tasks"></i> Tasks <span class="label label-danger">42</span></a></li>
-						<li><a href="#"><i class="fa fa-comments"></i> Comments <span class="label label-warning">42</span></a></li>
-						<li class="dropdown-menu-header text-center">
-							<strong>Settings</strong>
-						</li>
-						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
-						<li class="divider"></li> -->
-						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-						<li class="m_2"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+    						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+    						<li class="m_2"><a href="<?php echo base_url() ?>admin/logout"><i class="fa fa-lock"></i> Logout</a></li>
 	        		</ul>
 	      		</li>
 			</ul>
-			<form class="navbar-form navbar-right">
+			<!-- <form class="navbar-form navbar-right">
               <input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
-            </form>
+            </form> -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -183,10 +126,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users nav_icon"></i>Reserfasi<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-users nav_icon"></i>Reservasi<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?php echo base_url() ?>admin/reservasi">Daftar Reserfasi</a>
+                                    <a href="<?php echo base_url() ?>admin/reservasi">Daftar Reservasi</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -197,18 +140,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li>
                                     <a href="<?php echo base_url() ?>admin/general">Umum</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="<?php echo base_url() ?>admin/parameter">Parameter Kamar</a>
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <a href="<?php echo base_url() ?>admin/maps">Maps</a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="<?php echo base_url() ?>admin/socialmedia">Sosial Media</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <!-- <li>
+                          <a href="#"><i class="fa fa-archive"></i> Plugin</a>
+                          <ul class="nav nav-second-level">
+                            <li>
+                              <a href="<?php echo base_url() ?>admin/content-home">Content Home</a>
+                            </li>
+                          </ul>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -227,8 +178,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        </div>
       <!-- /#page-wrapper -->
    </div>
+
+   <div class="modal fade" id="myModalNotif" tabindex="-1" role="dialog">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" >Reservasi Baru</h4>
+         </div>
+         <div class="modal-body">
+           <table id="notif" class="table table-striped"></table>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+         </div>
+       </div>
+     </div>
+   </div>
+
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    function showNotif(idNotif, sts) {
+      $("#myModalNotif").modal("show");
+      $.post('<?php echo base_url() . 'admin/getnotif' ?>', {id:idNotif}, function (json) {
+        if( json.length > 0 ){
+          $("#notif").html('');
+          $.each(json, function(idx, val){
+            var str = '<tr><td>Nama</td><td>: '+val.nama+'</td></tr>'+
+                      '<tr><td>Alamat</td><td>: '+val.alamat+'</td></tr>'+
+                      '<tr><td>Telp</td><td>: '+val.telp+'</td></tr>'+
+                      '<tr><td>Email</td><td>: '+val.email+'</td></tr>'+
+                      '<tr><td>Checkin</td><td>: '+val.checkin+'</td></tr>'+
+                      '<tr><td>Checkout</td><td>: '+val.checkout+'</td></tr>'+
+                      '<tr><td>Jenis Kamar</td><td>: '+val.kamar+'</td></tr>'+
+                      '<tr><td>Jumlah Kamar</td><td>: '+val.jumlah+'</td></tr>';
+            $("#notif").append(str);
+          })
+        }
+      })
+
+      if(sts !== null){
+        $("."+sts).html('');
+      }
+    }
+    </script>
 </body>
 </html>

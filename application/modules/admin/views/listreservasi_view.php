@@ -13,19 +13,27 @@
 	</thead>
 	<tbody>
 		<?php
+		$i = 1;
 		foreach ($listData->result() as $key) {
-			echo '<tr>
+			if( $key->isread == 0 ){
+				$isread = '<span class="badge">Baru</span>';
+			} else {
+				$isread ='';
+			}
+			echo '<tr onclick="showNotif(\''.$key->KodeR.'\', \'status-'.$i.'\')">
 					<td>'.$key->Nama.'</td>
 					<td>'.$key->Telp.'</td>
 					<td>'.$this->Admin_model->generateDate($key->TglPesan, 'c').'</td>
 					<td>'.$this->Admin_model->generateDate($key->TglChekOut, 'c').'</td>
 					<td>
-						<div class="btn-group">
+						<!--<div class="btn-group">
 							<a href="" class="btn btn-default"><i class="fa fa-edit"></i></a>
 							<a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-						</div>
+						</div>-->
+						<span class="status-'.$i.'">'.$isread.'</span>
 					</td>
 				</tr>';
+				$i++;
 		}
 		?>
 	</tbody>
