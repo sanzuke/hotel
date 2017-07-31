@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Modern an Admin Panel Category Flat Bootstarp Resposive Website Template | Login :: w3layouts</title>
+<title>Admin Panel| Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -28,7 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body id="login">
   <div class="login-logo">
-    <a href="index.html"><img src="<?php echo base_url(); ?>assets/admin/images/logo.png" alt=""/></a>
+    <!-- <a href="index.html"><img src="<?php echo base_url(); ?>assets/admin/images/logo.png" alt=""/></a> -->
   </div>
   <h2 class="form-heading">login</h2>
   <div class="app-cam">

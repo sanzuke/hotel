@@ -135,4 +135,10 @@ class Admin_model extends CI_Model {
 			$query = $this->db->query("SELECT * FROM cm_reservasi WHERE isread = '0' ORDER BY KodeR DESC");
 			return count($query->result());
 		}
+
+		public function todayReservasi()
+		{
+			$query = $this->db->query("SELECT * FROM cm_reservasi WHERE createddate = CURRENT_DATE ORDER BY KodeR DESC");
+			return count($query->result());
+		}
 }

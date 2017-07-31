@@ -83,6 +83,7 @@ class Admin extends MX_Controller {
 		$this->load->model("Admin_model");
 		$data['reserfasi5Baru'] = $this->Admin_model->new5Reserfasi();
 		$data['reserfasiAllBaru'] = $this->Admin_model->newcountAllReserfasi();
+		$data['reserfasiToday'] = $this->Admin_model->todayReservasi();
 
 		$data['konten_view'] 	= "dashboard_view";
 		$data['judul_halaman']	= "Dashboard";
